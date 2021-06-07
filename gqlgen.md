@@ -16,7 +16,7 @@ And now the fun begins. We'll be using the gqlgen package by 99designs. First we
 ```sh
 go get github.com/99designs/gqlgen
 ```
-Most likely you'll need to add a few more dependencies, as stated in gqlgen command output. After you do that, we can start our new graphql server by running:
+Most likely you'll need to add a few more dependencies, as stated in gqlgen command output. After you do that, we can start our new GraphQL server by running:
 ```sh
 go run server.go
 ```
@@ -33,7 +33,7 @@ type Blogpost {
     title: String!
     file: String!
     rating: Number
-    comments: [Comment!]
+    comments: [Comment!]!
     author: User!
     published: Date!
 }
@@ -71,4 +71,6 @@ type Mutation {
 ```
 Now what have we just written?
 
-At the top we are declaring `Blogpost`, `User` and `Comment` type.
+At the top we are declaring `Blogpost`, `User` and `Comment` type. These are the types of data we are going to be using in our blog. They describe what fields we can find on each type. Also notice the fields themselves are typed, so working on frontend we always know what to expect from server after issuing specific query.
+
+Something worth noticing is the `comments` field on `Blogpost` object type. It's an array of `Comment` objects. The `[Comment!]!` part means that there always will be an array (but the array can be empty) and it can contain only `Comment` objects.
